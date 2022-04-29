@@ -1,3 +1,4 @@
+// Tablero
 (function () {
     self.Board = function (width, height) {
         this.width = width;
@@ -18,6 +19,7 @@
     }
 })();
 
+// Pelota
 (function () {
     self.Ball = function (x, y, radius, board) {
 
@@ -47,7 +49,7 @@
             return this.radius * 2;
         },
         collision: function (bar) {
-            // Reacciona a la colisión
+            // Reacción a la colisión
             var relative_intersect_y = ( bar.y + (bar.height / 2) ) - this.y;
 
 			var normalized_intersect_y = relative_intersect_y / (bar.height / 2);
@@ -63,6 +65,7 @@
     }
 })();
 
+// Barras laterales
 (function () {
     self.Bar = function (x, y, width, height, board) {
         this.x = x;
@@ -88,6 +91,7 @@
     }
 })();
 
+// Vista del tablero en el canvas
 (function () {
     self.BoardView = function (canvas, board) {
         this.canvas = canvas;
@@ -164,6 +168,7 @@
     }
 })();
 
+// Instanciación de objetos
 var board = new Board(800, 400);
 var barRight = new Bar(20, 100, 40, 100, board);
 var barLeft = new Bar(740, 100, 40, 100, board);
@@ -171,7 +176,7 @@ var canvas = document.getElementById('canvas');
 var board_view = new BoardView(canvas, board);
 var ball = new Ball(350, 100, 10, board);
 
-
+// Listener para tomar las teclas ingresadas por el usuario.
 document.addEventListener("keydown", function (ev) {
     if (ev.keyCode == 38) {
         ev.preventDefault();
@@ -192,6 +197,7 @@ document.addEventListener("keydown", function (ev) {
     // console.log("barL: " + barLeft + "\nbarR: " + barRight);
 });
 
+// Dibuja el canvas en el inicio
 board_view.draw();
 window.requestAnimationFrame(controller);
 
